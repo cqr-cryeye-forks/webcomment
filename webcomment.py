@@ -96,14 +96,12 @@ def process_targets(targets, log):
 
 def process_target(url, log):
     try:
-        log.write("---------- " + url + " ----------\n")
         content = get_content(url)
         comments = get_html_comments(content.strip().replace('\n', ''))
         for idx, comment in enumerate(comments):
             if is_valid(comment):
-                log.write(comment.strip() + "\n")
+                log.write(comment.strip() + "|__END_OF_COMMENT__|\n")
         log.write("\n\n")
-        print("- " + url)
     except Exception as error:
         print(error)
 
